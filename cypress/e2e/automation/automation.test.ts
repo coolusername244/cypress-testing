@@ -49,7 +49,7 @@ it('Test Case 5: Register User with existing email', () => {
   cy.deleteAccount();
 });
 
-it.only('Test Case 6: Contact Us Form', () => {
+it('Test Case 6: Contact Us Form', () => {
   cy.visitHomePage();
   cy.get('a[href="/contact_us"]').click();
   cy.contains(/GET IN TOUCH/i).should('be.visible');
@@ -62,4 +62,10 @@ it.only('Test Case 6: Contact Us Form', () => {
   cy.contains(/Success! Your details have been submitted successfully/i).should(
     'be.visible',
   );
+});
+
+it('Test Case 7: Verify Test Cases Page', () => {
+  cy.visitHomePage();
+  cy.get('a[href="/test_cases"]').eq(0).click();
+  cy.url().should('eq', 'https://automationexercise.com/test_cases');
 });
