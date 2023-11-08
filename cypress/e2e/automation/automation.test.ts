@@ -70,7 +70,7 @@ it('Test Case 7: Verify Test Cases Page', () => {
   cy.url().should('eq', 'https://automationexercise.com/test_cases');
 });
 
-it.only('Test Case 8: Verify All Products and product detail page', () => {
+it('Test Case 8: Verify All Products and product detail page', () => {
   cy.visitHomePage();
   cy.get('a[href="/products"]').click();
   cy.get('h2')
@@ -95,4 +95,17 @@ it.only('Test Case 8: Verify All Products and product detail page', () => {
   cy.get('.product-information')
     .contains(/Brand:/i)
     .should('be.visible');
+});
+
+it.only('Test Case 9: Search Product', () => {
+  cy.visitHomePage();
+  cy.get('a[href="/products"]').click();
+  cy.get('h2')
+    .contains(/all products/i)
+    .should('be.visible');
+  cy.get('#search_product').type('polo');
+  cy.get('#submit_search').click();
+  cy.get('.productinfo').each($result => {
+    cy.wrap($result).should('be.visible');
+  });
 });
