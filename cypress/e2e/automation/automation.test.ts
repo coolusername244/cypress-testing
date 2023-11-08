@@ -27,5 +27,24 @@ it('Test Case 4: Logout User', () => {
   cy.get('a[href="/logout"]').click();
   cy.get('.login-form').should('contain', 'Login to your account');
   cy.performLogin('123123test@test123.com', 'test');
+  cy.contains(/logged in as test testerson/i).should('be.visible');
+  cy.deleteAccount();
+});
+
+it('Test Case 5: Register User with existing email', () => {
+  cy.visitHomePage();
+  cy.performSignUp('test testerson', '123123test@test123.com', 'test');
+  cy.get('a[href="/logout"]').click();
+  cy.get('.login-form').should('contain', 'Login to your account');
+  cy.get('.signup-form').should('contain', 'New User Signup!');
+  cy.get('[data-qa="signup-name"]').type('test testerson');
+  cy.get('[data-qa="signup-email"]').type('123123test@test123.com');
+  cy.get('[data-qa="signup-button"]').click();
+  cy.get('.signup-form > form > p').should(
+    'contain',
+    'Email Address already exist!',
+  );
+  cy.performLogin('123123test@test123.com', 'test');
+  cy.contains(/logged in as test testerson/i).should('be.visible');
   cy.deleteAccount();
 });
