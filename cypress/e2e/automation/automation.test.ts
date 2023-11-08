@@ -48,3 +48,18 @@ it('Test Case 5: Register User with existing email', () => {
   cy.contains(/logged in as test testerson/i).should('be.visible');
   cy.deleteAccount();
 });
+
+it.only('Test Case 6: Contact Us Form', () => {
+  cy.visitHomePage();
+  cy.get('a[href="/contact_us"]').click();
+  cy.contains(/GET IN TOUCH/i).should('be.visible');
+  cy.get('[data-qa="name"]').type('test');
+  cy.get('[data-qa="email"]').type('test@test.com');
+  cy.get('[data-qa="subject"]').type('test');
+  cy.get('[data-qa="message"]').type('test');
+  cy.get('input[type="file"]').selectFile('cypress/fixtures/example.json');
+  cy.get('[data-qa="submit-button"]').click();
+  cy.contains(/Success! Your details have been submitted successfully/i).should(
+    'be.visible',
+  );
+});
