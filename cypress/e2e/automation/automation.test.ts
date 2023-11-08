@@ -69,3 +69,30 @@ it('Test Case 7: Verify Test Cases Page', () => {
   cy.get('a[href="/test_cases"]').eq(0).click();
   cy.url().should('eq', 'https://automationexercise.com/test_cases');
 });
+
+it.only('Test Case 8: Verify All Products and product detail page', () => {
+  cy.visitHomePage();
+  cy.get('a[href="/products"]').click();
+  cy.get('h2')
+    .contains(/all products/i)
+    .should('be.visible');
+  cy.get('.features_items').should('be.visible');
+  cy.get('a[href="/product_details/1"]').click();
+  cy.url().should('eq', 'https://automationexercise.com/product_details/1');
+  cy.get('.product-information')
+    .contains(/blue top/i)
+    .should('be.visible');
+  cy.get('.product-information')
+    .contains(/Category:/i)
+    .should('be.visible');
+  cy.get('.product-information').contains(/Rs./i).should('be.visible');
+  cy.get('.product-information')
+    .contains(/Availability:/i)
+    .should('be.visible');
+  cy.get('.product-information')
+    .contains(/Condition:/i)
+    .should('be.visible');
+  cy.get('.product-information')
+    .contains(/Brand:/i)
+    .should('be.visible');
+});
