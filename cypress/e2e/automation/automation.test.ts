@@ -112,11 +112,11 @@ it('Test Case 9: Search Product', () => {
 
 it('Test Case 10: Verify Subscription in home page', () => {
   cy.visitHomePage();
-  cy.scrollTo('bottom');
-  cy.contains(/subscription/i).should('be.visible');
-  cy.get('#susbscribe_email').type('123123test@test123.com');
-  cy.get('#subscribe').click();
-  cy.get('#success-subscribe')
-    .contains(/You have been successfully subscribed!/i)
-    .should('be.visible');
+  cy.subscribe('123123test@test123.com');
+});
+
+it.only('Test Case 11: Verify Subscription in Cart page', () => {
+  cy.visitHomePage();
+  cy.get('a[href="/view_cart"]').eq(0).click();
+  cy.subscribe('123123test@test123.com');
 });
