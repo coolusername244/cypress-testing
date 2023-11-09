@@ -11,6 +11,7 @@ declare global {
       ): Chainable<any>;
       performLogin(email: string, password: string): Chainable<any>;
       deleteAccount(): Chainable<any>;
+      subscribe(email: string): Chainable<any>;
     }
   }
 }

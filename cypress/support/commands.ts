@@ -46,3 +46,13 @@ Cypress.Commands.add('deleteAccount', () => {
   cy.get('a[href="/delete_account"]').click();
   cy.contains(/account deleted!/i).should('be.visible');
 });
+
+Cypress.Commands.add('subscribe', (email?) => {
+  cy.scrollTo('bottom');
+  cy.contains(/subscription/i).should('be.visible');
+  cy.get('#susbscribe_email').type(email);
+  cy.get('#subscribe').click();
+  cy.get('#success-subscribe')
+    .contains(/You have been successfully subscribed!/i)
+    .should('be.visible');
+});
