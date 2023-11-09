@@ -97,15 +97,26 @@ it('Test Case 8: Verify All Products and product detail page', () => {
     .should('be.visible');
 });
 
-it.only('Test Case 9: Search Product', () => {
+it('Test Case 9: Search Product', () => {
   cy.visitHomePage();
   cy.get('a[href="/products"]').click();
   cy.get('h2')
     .contains(/all products/i)
     .should('be.visible');
-  cy.get('#search_product').type('polo');
+  cy.get('#search_product').type('top');
   cy.get('#submit_search').click();
   cy.get('.productinfo').each($result => {
     cy.wrap($result).should('be.visible');
   });
+});
+
+it('Test Case 10: Verify Subscription in home page', () => {
+  cy.visitHomePage();
+  cy.scrollTo('bottom');
+  cy.contains(/subscription/i).should('be.visible');
+  cy.get('#susbscribe_email').type('123123test@test123.com');
+  cy.get('#subscribe').click();
+  cy.get('#success-subscribe')
+    .contains(/You have been successfully subscribed!/i)
+    .should('be.visible');
 });
